@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+using namespace std;
+
+struct TreeNode
+{
+	int val;
+	TreeNode* left;
+	TreeNode* right;
+};
+
+vector<int> inorderTravesal(TreeNode* root)
+{
+	vector<int>path;
+
+	TreeNode* p = root;
+	stack<TreeNode*> stk;
+	if (p == NULL)
+		return path;
+	while (p != NULL || !stk.empty())
+	{
+		if (p != NULL)
+		{
+			stk.push(p);
+			p = p->left;
+		}
+		else
+		{
+			p = stk.top();
+			stk.pop();
+			path.push_back(p->val);
+			p = p->right;
+		}
+	}
+	return path;
+}
